@@ -1,0 +1,27 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+
+filename=r"E:\各种资料\新建文件夹\Python-Data-Aanalysis-and-Miner-master\第2章 从收入预测分析开始\income.xlsx"
+income=pd.read_excel(filename)
+# print(income.apply(lambda x:np.sum(x.isnull())))
+income.fillna(value = {'workclass':income.workclass.mode()[0],
+                              'occupation':income.occupation.mode()[0],
+                              'native-country':income['native-country'].mode()[0]}, inplace = True)
+# print(income.apply(lambda x:np.sum(x.isnull())))
+# print(income.describe(include="object"))
+
+# 导入绘图模块
+import matplotlib.pyplot as plt
+# 设置绘图风格
+plt.style.use('ggplot')
+# 设置多图形的组合
+fig, axes = plt.subplots(2, 1)
+# 绘制不同收入水平下的年龄核密度图
+income.age[income.income == ' <=50K'].plot(kind = 'kde', label = '<=50K', ax = axes[0], legend = True, linestyle = '-')
+income.age[income.income == ' >50K'].plot(kind = 'kde', label = '>50K', ax = axes[0], legend = True, linestyle = '--')
+# 绘制不同收入水平下的周工作小时数和密度图
+income['hours-per-week'][income.income == ' <=50K'].plot(kind = 'kde', label = '<=50K', ax = axes[1], legend = True, linestyle = '-')
+income['hours-per-week'][income.income == ' >50K'].plot(kind = 'kde', label = '>50K', ax = axes[1], legend = True, linestyle = '--')
+# 显示图形
+plt.show()
