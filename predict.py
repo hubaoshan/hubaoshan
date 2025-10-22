@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Mar  7 16:57:35 2019
 
-@author: Jie Zhang，微信公众号【EasyShu】，本代码源自《Python数据可视化之美》
-"""
 import matplotlib.pyplot as plt 
 import pandas as pd
 import seaborn as sns
